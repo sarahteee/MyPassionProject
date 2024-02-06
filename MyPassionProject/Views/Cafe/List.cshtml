@@ -8,7 +8,7 @@
 @foreach (var cafe in Model)
 {
     <div>
-        <h2>@cafe.CafeName</h2>
+        <h2><a href="/Cafe/Details/@cafe.CafeId">@cafe.CafeName</a></h2>
         <div>@cafe.DistrictName</div>
         <div>@cafe.CafeAddress</div>
 

@@ -14,7 +14,7 @@ namespace MyPassionProject.Controllers
         // GET: Cafe/List
         public ActionResult List()
         {
-            //objective: with our cafe data api to retrieve a list of animals
+            //objective: with our cafe data api to retrieve a list of cafes
             //curl https://localhost:44321/api/cafedata/listcafes
 
             HttpClient client = new HttpClient() { };
@@ -31,7 +31,16 @@ namespace MyPassionProject.Controllers
         // GET: Cafe/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            //objective: with our cafe data api to retrieve one cafe
+            //curl https://localhost:44321/api/cafedata/findcafe/{id}
+
+            HttpClient client = new HttpClient() { };
+            string url = "https://localhost:44321/api/cafedata/findcafe/"+id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            CafeDto selectedcafe = response.Content.ReadAsAsync<CafeDto>().Result;
+
+            return View(selectedcafe);
         }
 
         // GET: Cafe/Create
