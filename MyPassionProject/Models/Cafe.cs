@@ -38,6 +38,7 @@ namespace MyPassionProject.Models
         public string CafeDescription { get; set; }
         public string CafeWebsite { get; set; }
         public byte[] CafeImage { get; set; }
+        public string DistrictName { get; set; }
 
     }
 }

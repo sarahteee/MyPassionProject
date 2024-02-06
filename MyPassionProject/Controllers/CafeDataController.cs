@@ -28,6 +28,12 @@ namespace MyPassionProject.Controllers
             {
                 CafeId = c.CafeId,
                 CafeName = c.Name,
+                CafeAddress = c.Address,
+                CafePhone = c.Phone,
+                CafeDescription = c.Description,
+                CafeWebsite = c.Website,
+                CafeImage = c.Image,
+                DistrictName = c.District.DistrictName
             }
             ));
 
@@ -39,13 +45,24 @@ namespace MyPassionProject.Controllers
         [HttpGet]
         public IHttpActionResult FindCafe(int id)
         {
-            Cafe cafe = db.Cafes.Find(id);
-            if (cafe == null)
+            Cafe Cafe = db.Cafes.Find(id);
+            CafeDto CafeDto = new CafeDto()
+            {
+                CafeId = Cafe.CafeId,
+                CafeName = Cafe.Name,
+                CafeAddress = Cafe.Address,
+                CafePhone = Cafe.Phone,
+                CafeDescription = Cafe.Description,
+                CafeWebsite = Cafe.Website,
+                CafeImage = Cafe.Image,
+                DistrictName = Cafe.District.DistrictName
+            };
+            if (Cafe == null)
             {
                 return NotFound();
             }
 
-            return Ok(cafe);
+            return Ok(CafeDto);
         }
 
         // POST: api/CafeData/UpdateCafe/5
@@ -114,7 +131,7 @@ namespace MyPassionProject.Controllers
             db.Cafes.Remove(cafe);
             db.SaveChanges();
 
-            return Ok(cafe);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)
