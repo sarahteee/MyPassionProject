@@ -1,0 +1,17 @@
+﻿@model IEnumerable<MyPassionProject.Models.CafeDto>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+@foreach (var cafe in Model)
+{
+    <div>
+        <h2>@cafe.CafeName</h2>
+        <div>@cafe.DistrictName</div>
+        <div>@cafe.CafeAddress</div>
+
+    </div>
+}
+
