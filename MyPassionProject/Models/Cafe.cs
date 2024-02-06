@@ -9,7 +9,7 @@ namespace MyPassionProject.Models
 {
     public class Cafe
     {
-        //different aspects of a cafe
+        //different aspects of a cafe 
         [Key]
         public int CafeId { get; set; }
         public string Name { get; set; }
