@@ -13,6 +13,8 @@ namespace MyPassionProject.Controllers
     public class CafeController : Controller
     {
         private static readonly HttpClient client;
+        private JavaScriptSerializer jss = new JavaScriptSerializer();
+
 
         static CafeController()
         {
@@ -50,6 +52,11 @@ namespace MyPassionProject.Controllers
             return View(selectedcafe);
         }
 
+        public ActionResult Error()
+        {
+            return View();
+        }
+
         // GET: Cafe/New
         public ActionResult New()
         {
@@ -64,16 +71,21 @@ namespace MyPassionProject.Controllers
             //curl -H "Content-Type:application/json" -d @cafe.json https://localhost:44321/api/cafedata/addcafe
             string url = "addcafe";
 
-            JavaScriptSerializer jss = new JavaScriptSerializer();
             string jsonpayload = jss.Serialize(cafe);
 
 
             HttpContent content = new StringContent(jsonpayload);
             content.Headers.ContentType.MediaType = "application/json";
 
-            client.PostAsync(url, content);
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode) 
+            {
+                return RedirectToAction("List");
+            }else
+            {
+                return RedirectToAction("Error");
+            }
 
-            return RedirectToAction("List");
         }
 
         // GET: Cafe/Edit/5
