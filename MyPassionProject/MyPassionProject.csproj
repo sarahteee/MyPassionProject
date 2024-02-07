@@ -293,6 +293,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Cafe\List.cshtml" />
     <Content Include="Views\Cafe\Details.cshtml" />
+    <Content Include="Views\Cafe\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
