@@ -91,7 +91,10 @@ namespace MyPassionProject.Controllers
         // GET: Cafe/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            string url = "findcafe/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            CafeDto selectedcafe = response.Content.ReadAsAsync<CafeDto>().Result;
+            return View(selectedcafe);
         }
 
         // POST: Cafe/Edit/5
