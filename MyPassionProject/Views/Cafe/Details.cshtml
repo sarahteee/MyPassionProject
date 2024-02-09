@@ -1,4 +1,4 @@
-﻿@model MyPassionProject.Models.CafeDto
+﻿@model MyPassionProject.Models.ViewModels.DetailsCafe
 
 
 @{
@@ -6,11 +6,15 @@
 }
 
 <a href="/Cafe/List">Back to List</a>
-<h2>@Model.CafeName</h2>
-<div>@Model.DistrictName</div>
-<div>@Model.CafeAddress</div>
-<div>@Model.CafePhone</div>
-<div>@Model.CafeDescription</div>
-<div>@Model.CafeWebsite</div>
-<div>@Model.CafeImage</div>
+<br />
+<a href="/Cafe/Edit/@Model.selectedcafe.CafeId">Update</a>
+<br />
+<a style="color:darkred;" href="/Cafe/DeleteConfirm/@Model.selectedcafe.CafeId">Delete</a>
+<h2>@Model.selectedcafe.CafeName</h2>
+<div>@Model.selectedcafe.DistrictName</div>
+<div>@Model.selectedcafe.CafeAddress</div>
+<div>@Model.selectedcafe.CafePhone</div>
+<div>@Model.selectedcafe.CafeDescription</div>
+<div>@Model.selectedcafe.CafeWebsite</div>
+<div>@Model.selectedcafe.CafeImage</div>
 

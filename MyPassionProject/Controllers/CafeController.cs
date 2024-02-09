@@ -41,6 +41,8 @@ namespace MyPassionProject.Controllers
         // GET: Cafe/Details/5
         public ActionResult Details(int id)
         {
+            DetailsCafe ViewModel = new DetailsCafe();
+
             //objective: with our cafe data api to retrieve one cafe
             //curl https://localhost:44321/api/cafedata/findcafe/{id}
 
@@ -49,7 +51,9 @@ namespace MyPassionProject.Controllers
 
             CafeDto selectedcafe = response.Content.ReadAsAsync<CafeDto>().Result;
 
-            return View(selectedcafe);
+            ViewModel.selectedcafe = selectedcafe;
+
+            return View(ViewModel);
         }
 
         public ActionResult Error()
@@ -90,6 +94,39 @@ namespace MyPassionProject.Controllers
 
         // GET: Cafe/Edit/5
         public ActionResult Edit(int id)
+
+
+            UpdateCafe ViewModel = new UpdateCafe();
+
+            string url = "findcafe/"+id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            CafeDto selectedcafe = response.Content.ReadAsAsync<CafeDto>().Result;
+            ViewModel.selectedcafe = selectedcafe;
+            return View(selectedcafe);
+        }
+
+        // POST: Cafe/Update/5
+        [HttpPost]
+        public ActionResult Update(int id, Cafe cafe)
+        {
+            string url = "updatecafe/" + id;
+            string jsonpayload = jss.Serialize(cafe);
+            HttpContent content= new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType= "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+
+        }
+
+        // GET: Cafe/Delete/5
+        public ActionResult DeleteConfirm(int id)
         {
             string url = "findcafe/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
@@ -97,41 +134,22 @@ namespace MyPassionProject.Controllers
             return View(selectedcafe);
         }
 
-        // POST: Cafe/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Cafe/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
         // POST: Cafe/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            string url = "deletecafe/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType= "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
     }

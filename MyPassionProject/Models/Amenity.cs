@@ -13,8 +13,15 @@ namespace MyPassionProject.Models
         public int AmenityId { get; set; }
         public string AmenityName { get; set; }
 
+
         //multiple cafes associated with an amenity
         public ICollection<Cafe> Cafes { get; set; }
 
+    }
+
+    public class AmenityDto
+    {
+        public int AmenityId { get; set; }
+        public string AmenityName { get; set; }
     }
 }

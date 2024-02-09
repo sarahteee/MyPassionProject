@@ -19,11 +19,13 @@ namespace MyPassionProject.Models
         public string Website { get; set; }
         public byte[] Image { get; set; }
 
+
         //a cafe has a district id
         //a district has many cafes
         [ForeignKey("District")]
         public int DistrictId { get; set; }
         public virtual District District { get; set; }
+
 
         //many amenities in a cafe
         public ICollection<Amenity> Amenities { get; set; }
@@ -38,7 +40,10 @@ namespace MyPassionProject.Models
         public string CafeDescription { get; set; }
         public string CafeWebsite { get; set; }
         public byte[] CafeImage { get; set; }
+
+        public int DistrictId { get; set; }
         public string DistrictName { get; set; }
+
 
     }
 }

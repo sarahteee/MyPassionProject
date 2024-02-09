@@ -12,4 +12,10 @@ namespace MyPassionProject.Models
         public int DistrictId { get; set; }
         public string DistrictName { get; set; }
     }
+
+    public class DistrictDto
+    {
+        public int DistrictId { get; set; }
+        public string DistrictName { get; set; }
+    }
 }

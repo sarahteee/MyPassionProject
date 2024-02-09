@@ -1,0 +1,49 @@
+﻿@model MyPassionProject.Models.ViewModels.UpdateCafe
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update Cafe</h2>
+<form action="/Cafe/Update/@Model.selectedcafe.CafeId" method="POST">
+    <div style="display:none;">
+
+        <input type="text" name="CafeId" value="@Model.selectedcafe.CafeId" />
+    </div>
+    <div>
+        <label>Name:</label> <input type="text" name="CafeName" value="@Model.selectedcafe.CafeName" />
+    </div>
+    <div>
+        <label>District Id:</label>
+        <select name="DistrictId">
+            @foreach (var district in Model.DistrictOptions)
+            {
+                string selected = "";
+                if (district.DistrictId == Model.selectedcafe.DistrictId)
+                {
+                    selected = "selected";
+                }
+                <option value="@district.DistrictId">@selected>@district.DistrictName</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Address:</label> <input type="text" name="CafeAddress" value="@Model.selectedcafe.CafeAddress"/>
+    </div>
+    <div>
+        <label>Phone:</label> <input type="text" name="CafePhone" value="@Model.selectedcafe.CafePhone" />
+    </div>
+    <div>
+        <label>Description:</label> <input type="text" name="CafeDescription" value="@Model.selectedcafe.CafeDescription"/>
+    </div>
+    <div>
+        <label>Website:</label> <input type="text" name="CafeWebsite" value="@Model.selectedcafe.CafeWebsite"/>
+    </div>
+    <div>
+        <label>Image:</label> <input type="file" name="CafeImage" value="@Model.selectedcafe.CafeImage" />
+    </div>
+    <div>
+        <input type="submit" value="Add Cafe" />
+    </div>
+
+</form>
+

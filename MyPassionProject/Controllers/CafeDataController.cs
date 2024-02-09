@@ -18,7 +18,8 @@ namespace MyPassionProject.Controllers
 
         // GET: api/CafeData/ListCafes
         [HttpGet]
-        public IEnumerable<CafeDto> ListCafes()
+        [ResponseType(typeof(CafeDto))]
+        public IHttpActionResult ListCafes()
         {
             //sending query to database select * from cafes
             List<Cafe> Cafes = db.Cafes.ToList();
@@ -33,11 +34,12 @@ namespace MyPassionProject.Controllers
                 CafeDescription = c.Description,
                 CafeWebsite = c.Website,
                 CafeImage = c.Image,
+                DistrictId = c.DistrictId,
                 DistrictName = c.District.DistrictName
             }
             ));
 
-            return CafeDtos;
+            return Ok(CafeDtos);
         }
 
         // GET: api/CafeData/FindCafe/5
@@ -145,7 +147,7 @@ namespace MyPassionProject.Controllers
 
         private bool CafeExists(int id)
         {
-            return db.Cafes.Count(e => e.CafeId == id) > 0;
+            return db.Cafes.Count(c => c.CafeId == id) > 0;
         }
     }
 }

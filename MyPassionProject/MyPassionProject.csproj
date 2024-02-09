@@ -295,6 +295,8 @@
     <Content Include="Views\Cafe\Details.cshtml" />
     <Content Include="Views\Cafe\New.cshtml" />
     <Content Include="Views\Cafe\Error.cshtml" />
+    <Content Include="Views\Cafe\DeleteConfirm.cshtml" />
+    <Content Include="Views\Cafe\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
