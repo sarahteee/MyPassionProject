@@ -35,5 +35,7 @@ namespace MyPassionProject.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<MyPassionProject.Models.Amenity> Amenities { get; set; }
     }
 }

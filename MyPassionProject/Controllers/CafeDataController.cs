@@ -70,19 +70,19 @@ namespace MyPassionProject.Controllers
         // POST: api/CafeData/UpdateCafe/5
         [ResponseType(typeof(void))]
         [HttpPost]
-        public IHttpActionResult UpdateCafe(int id, Cafe cafe)
+        public IHttpActionResult UpdateCafe(int id, Cafe Cafe)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != cafe.CafeId)
+            if (id != Cafe.CafeId)
             {
                 return BadRequest();
             }
 
-            db.Entry(cafe).State = EntityState.Modified;
+            db.Entry(Cafe).State = EntityState.Modified;
 
             try
             {
@@ -106,17 +106,17 @@ namespace MyPassionProject.Controllers
         // POST: api/CafeData/AddCafe
         [ResponseType(typeof(Cafe))]
         [HttpPost]
-        public IHttpActionResult AddCafe(Cafe cafe)
+        public IHttpActionResult AddCafe(Cafe Cafe)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Cafes.Add(cafe);
+            db.Cafes.Add(Cafe);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = cafe.CafeId }, cafe);
+            return CreatedAtRoute("DefaultApi", new { id = Cafe.CafeId }, Cafe);
         }
 
         // POST: api/CafeData/DeleteCafe/5
@@ -124,13 +124,13 @@ namespace MyPassionProject.Controllers
         [HttpPost]
         public IHttpActionResult DeleteCafe(int id)
         {
-            Cafe cafe = db.Cafes.Find(id);
-            if (cafe == null)
+            Cafe Cafe = db.Cafes.Find(id);
+            if (Cafe == null)
             {
                 return NotFound();
             }
 
-            db.Cafes.Remove(cafe);
+            db.Cafes.Remove(Cafe);
             db.SaveChanges();
 
             return Ok();

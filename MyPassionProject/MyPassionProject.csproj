@@ -182,8 +182,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AmenityDataController.cs" />
     <Compile Include="Controllers\CafeController.cs" />
     <Compile Include="Controllers\CafeDataController.cs" />
+    <Compile Include="Controllers\DistrictDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
