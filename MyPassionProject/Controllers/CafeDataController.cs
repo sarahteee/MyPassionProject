@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -42,8 +43,99 @@ namespace MyPassionProject.Controllers
             return Ok(CafeDtos);
         }
 
+        [HttpGet]
+        [ResponseType(typeof(CafeDto))]
+        public IHttpActionResult ListCafesForDistrict(int id)
+        {
+            //SQL Equivalent:
+            //Select * from cafes where cafes.districtid = {id}
+            List<Cafe> Cafes = db.Cafes.Where(c => c.DistrictId == id).ToList();
+            List<CafeDto> CafeDtos = new List<CafeDto>();
+
+            Cafes.ForEach(c => CafeDtos.Add(new CafeDto()
+            {
+                CafeId = c.CafeId,
+                CafeName = c.Name,
+                CafeAddress = c.Address,
+                CafePhone = c.Phone,
+                CafeDescription = c.Description,
+                CafeWebsite = c.Website,
+                CafeImage = c.Image,
+                DistrictId = c.DistrictId,
+                DistrictName = c.District.DistrictName
+            }));
+
+            return Ok(CafeDtos);
+        }
+
+        [HttpGet]
+        [ResponseType(typeof(CafeDto))]
+        public IHttpActionResult ListCafesWithAmenity(int id)
+        {
+
+            List<Cafe> Cafes = db.Cafes.Where(
+                c => c.Amenities.Any(
+                    a=>a.AmenityId==id
+                    )).ToList();
+            List<CafeDto> CafeDtos = new List<CafeDto>();
+
+            Cafes.ForEach(c => CafeDtos.Add(new CafeDto()
+            {
+                CafeId = c.CafeId,
+                CafeName = c.Name,
+                CafeAddress = c.Address,
+                CafePhone = c.Phone,
+                CafeDescription = c.Description,
+                CafeWebsite = c.Website,
+                CafeImage = c.Image,
+                DistrictId = c.DistrictId,
+                DistrictName = c.District.DistrictName
+            }));
+
+            return Ok(CafeDtos);
+        }
+
+        [HttpPost]
+        [Route("api/CafeData/AssociateCafeWithAmenity/{cafeid}/{amenityid}")]
+        public IHttpActionResult AssociateCafeWithAmenity(int cafeid, int amenityid)
+        {
+
+            Cafe SelectedCafe = db.Cafes.Include(c => c.Amenities).Where(c => c.CafeId == cafeid).FirstOrDefault();
+            Amenity SelectedAmenity = db.Amenities.Find(amenityid);
+
+            if (SelectedCafe == null || SelectedAmenity == null)
+            {
+                return NotFound();
+            }
+
+            SelectedCafe.Amenities.Add(SelectedAmenity);
+            db.SaveChanges();
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("api/CafeData/UnAssociateCafeWithAmenity/{cafeid}/{amenityid}")]
+        public IHttpActionResult UnAssociateCafeWithAmenity(int cafeid, int amenityid)
+        {
+
+            Cafe SelectedCafe = db.Cafes.Include(c => c.Amenities).Where(c => c.CafeId == cafeid).FirstOrDefault();
+            Amenity SelectedAmenity = db.Amenities.Find(amenityid);
+
+            if (SelectedCafe == null || SelectedAmenity == null)
+            {
+                return NotFound();
+            }
+
+            SelectedCafe.Amenities.Remove(SelectedAmenity);
+            db.SaveChanges();
+
+            return Ok();
+        }
+
+
         // GET: api/CafeData/FindCafe/5
-        [ResponseType(typeof(Cafe))]
+        [ResponseType(typeof(CafeDto))]
         [HttpGet]
         public IHttpActionResult FindCafe(int id)
         {

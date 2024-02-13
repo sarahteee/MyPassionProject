@@ -1,0 +1,22 @@
+﻿@model MyPassionProject.Models.ViewModels.DetailsAmenity
+@{
+    ViewBag.Title = "Details";
+}
+
+<a href="/Amenity/List">Go back to list</a>
+<br />
+<a href="/Amenity/Edit/@Model.SelectedAmenity.AmenityId">Update</a>
+<br />
+<a style="color:#ab2020;" href="/Amenity/DeleteConfirm/@Model.SelectedAmenity.AmenityId">Delete</a>
+<h2>@Model.SelectedAmenity.AmenityName</h2>
+
+
+
+<div>
+    <h3>Responsible for:</h3>
+    @foreach (var cafe in Model.ReleventCafes)
+    {
+        <a href="/Cafe/Details/@cafe.CafeId">@cafe.CafeName</a><br />
+
+    }
+</div>

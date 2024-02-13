@@ -18,3 +18,16 @@
 <div>@Model.selectedcafe.CafeWebsite</div>
 <div>@Model.selectedcafe.CafeImage</div>
 
+<div>
+    <h4>Add new Amenity to @Model.SelectedCafe.CafeName</h4>
+    <form method="POST" action="/Cafe/Associate/@Model.SelectedCafe.CafeId">
+        <select name="CafeId">
+            @foreach (var amenity in Model.AvailableAmenities)
+            {
+                <option value="@amenity.AmenityId">@amenity.AmenityName </option>
+            }
+
+        </select>
+        <input type="submit" value="Associate Amenity" />
+    </form>
+</div>

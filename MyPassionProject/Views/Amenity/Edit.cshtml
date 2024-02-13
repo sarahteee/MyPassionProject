@@ -1,0 +1,18 @@
+﻿@model MyPassionProject.Models.AmenityDto
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update Amenity</h2>
+<form action="/Amenity/Update/@Model.AmenityId" method="POST">
+    <div style="display:none;">
+        @* Pass through the Amenity ID *@
+        <input type="text" name="AmenityId" value="@Model.AmenityId" />
+    </div>
+    <div>
+        <label>Amenity:</label> <input type="text" name="AmenityName" value="@Model.AmenityName" />
+    </div>
+    <div>
+        <input type="submit" value="Update Amenity" />
+    </div>
+</form>

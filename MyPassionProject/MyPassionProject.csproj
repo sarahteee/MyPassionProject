@@ -182,9 +182,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AmenityController.cs" />
     <Compile Include="Controllers\AmenityDataController.cs" />
     <Compile Include="Controllers\CafeController.cs" />
     <Compile Include="Controllers\CafeDataController.cs" />
+    <Compile Include="Controllers\DistrictController.cs" />
     <Compile Include="Controllers\DistrictDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -299,6 +301,18 @@
     <Content Include="Views\Cafe\Error.cshtml" />
     <Content Include="Views\Cafe\DeleteConfirm.cshtml" />
     <Content Include="Views\Cafe\Edit.cshtml" />
+    <Content Include="Views\District\List.cshtml" />
+    <Content Include="Views\District\New.cshtml" />
+    <Content Include="Views\District\Error.cshtml" />
+    <Content Include="Views\District\Edit.cshtml" />
+    <Content Include="Views\District\Details.cshtml" />
+    <Content Include="Views\District\DeleteConfirm.cshtml" />
+    <Content Include="Views\Amenity\New.cshtml" />
+    <Content Include="Views\Amenity\List.cshtml" />
+    <Content Include="Views\Amenity\Error.cshtml" />
+    <Content Include="Views\Amenity\Edit.cshtml" />
+    <Content Include="Views\Amenity\Details.cshtml" />
+    <Content Include="Views\Amenity\DeleteConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

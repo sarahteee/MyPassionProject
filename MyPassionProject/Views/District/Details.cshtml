@@ -1,0 +1,21 @@
+﻿@model MyPassionProject.Models.ViewModels.DetailsDistricts
+@{
+    ViewBag.Title = "Details";
+}
+
+<a href="/District/List">Go back to list</a>
+<br />
+<a href="/District/Edit/@Model.SelectedDistrict.DistrictId">Update</a>
+<br />
+<a style="color:#ab2020;" href="/District/DeleteConfirm/@Model.SelectedDistrict.DistrictId">Delete</a>
+<h2>@Model.SelectedDistrict.DistrictName</h2>
+
+
+<div style="margin-top:100px;">
+    <h3>Cafes in this District</h3>
+    @foreach (var cafe in Model.RelatedDistricts)
+    {
+        <a href="/Cafe/Details/@cafe.CafeId">@cafe.CafeName</a>
+
+    }
+</div>

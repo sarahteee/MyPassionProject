@@ -1,0 +1,11 @@
+﻿@model MyPassionProject.Models.DistrictDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Are you sure you want to delete this district?</h2>
+<a href="/District/List">Cancel</a>
+<h3>Name: @Model.DistrictName</h3>
+<form action="/District/Delete/@Model.DistrictId" method="POST">
+    <input type="submit" value="Confirm Delete" />
+</form>

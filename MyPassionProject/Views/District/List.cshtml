@@ -1,0 +1,11 @@
+﻿@model IEnumerable<MyPassionProject.Models.DistrictDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+<a href="/District/New">New District</a>
+@foreach (var Disrtrict in Model)
+{
+    <h2><a href="/District/Details/@District.DIstrictId">@District.DistrictName</a></h2>
+}

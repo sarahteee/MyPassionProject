@@ -1,0 +1,11 @@
+﻿@model MyPassionProject.Models.AmenityDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Are you sure you want to delete this Amenity?</h2>
+<a href="/Amenity/List">Cancel</a>
+<h3>Name: @Model.AmenityName</h3>
+<form action="/Amenity/Delete/@Model.AmenityId" method="POST">
+    <input type="submit" value="Confirm Delete" />
+</form>

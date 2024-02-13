@@ -1,0 +1,11 @@
+﻿@model IEnumerable<MyPassionProject.Models.AmenityDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+<a href="/Amenity/New">New Amenity</a>
+@foreach (var Amenity in Model)
+{
+    <h2><a href="/Amenity/Details/@Amenity.AmenityId">@Amenity.AmenityName</a></h2>
+}

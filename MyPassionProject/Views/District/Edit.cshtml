@@ -1,0 +1,19 @@
+﻿@model MyPassionProject.Models.DistrictDto
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update District</h2>
+<form action="/District/Update/@Model.DistrictId" method="POST">
+    <div style="display:none;">
+        @* Pass through the District ID *@
+        <input type="text" name="DistrictId" value="@Model.DistrictId" />
+    </div>
+    <div>
+        <label>Name:</label> <input type="text" name="DistrictName" value="@Model.DistrictName" />
+    </div>
+    <div>
+        <input type="submit" value="Update District" />
+
+    </div>
+</form>
