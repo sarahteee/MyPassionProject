@@ -6,8 +6,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using MyPassionProject.Models.ViewModels;
+using System.Web.Script.Serialization;
 
 namespace MyPassionProject.Controllers
 {
@@ -49,22 +49,18 @@ namespace MyPassionProject.Controllers
 
             string url = "cafedata/findcafe/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-
             CafeDto selectedcafe = response.Content.ReadAsAsync<CafeDto>().Result;
-
             ViewModel.selectedcafe = selectedcafe;
 
             //show associated amenities with this cafe
             url = "amenitydata/listamenitiesforcafe/" + id;
             response = client.GetAsync(url).Result;
             IEnumerable<AmenityDto> AvailableAmenities = response.Content.ReadAsAsync<IEnumerable<AmenityDto>>().Result;
-
             ViewModel.AvailableAmenities = AvailableAmenities;
 
             url = "amenitydata/listamenitiesnotincafe/" + id;
             response= client.GetAsync(url).Result;
             IEnumerable<AmenityDto> CurrentAmenities = response.Content.ReadAsAsync<IEnumerable<AmenityDto>>().Result;
-
             ViewModel.CurrentAmenities = CurrentAmenities;
 
             return View(ViewModel);

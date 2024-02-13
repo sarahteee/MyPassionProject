@@ -13,8 +13,8 @@
 
 
 <div>
-    <h3>Responsible for:</h3>
-    @foreach (var cafe in Model.ReleventCafes)
+    <h3>Available In:</h3>
+    @foreach (var cafe in Model.RelevantCafes)
     {
         <a href="/Cafe/Details/@cafe.CafeId">@cafe.CafeName</a><br />
 

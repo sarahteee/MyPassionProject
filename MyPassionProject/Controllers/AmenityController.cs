@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using MyPassionProject.Models.ViewModels;
 using System.Web.Script.Serialization;
 
 namespace MyPassionProject.Controllers
@@ -134,7 +135,7 @@ namespace MyPassionProject.Controllers
         {
             string url = "amenitydata/findamenity/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            AMenityDto SelectedAmenity = response.Content.ReadAsAsync<AmenityDto>().Result;
+            AmenityDto SelectedAmenity = response.Content.ReadAsAsync<AmenityDto>().Result;
             return View(SelectedAmenity);
         }
 

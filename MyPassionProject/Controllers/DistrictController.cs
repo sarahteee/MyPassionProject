@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using MyPassionProject.Models.ViewModels;
 using System.Web.Script.Serialization;
 
 namespace MyPassionProject.Controllers
@@ -26,14 +27,15 @@ namespace MyPassionProject.Controllers
             //objective: communicate with our Species data api to retrieve a list of Speciess
             //curl https://localhost:44321/api/districtdata/listdistricts
 
+            DetailsDistrict ViewModel = new DetailsDistrict();
 
             string url = "districtdata/listdistricts";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             IEnumerable<DistrictDto> Districts = response.Content.ReadAsAsync<IEnumerable<DistrictDto>>().Result;
+                        
 
-
-            return View(District);
+            return View(Districts);
         }
 
         // GET: District/Details/5
@@ -42,16 +44,16 @@ namespace MyPassionProject.Controllers
             //objective: communicate with our Species data api to retrieve one Species
             //curl https://localhost:44321/api/districtdata/finddistricts/{id}
 
-            DetailsDistricts ViewModel = new DetailsDistricts();
+            DetailsDistrict ViewModel = new DetailsDistrict();
 
             string url = "districtdata/finddistricts/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            DistrictDto SelectedSpecies = response.Content.ReadAsAsync<DistrictDto>().Result;
+            DistrictDto SelectedDistrict = response.Content.ReadAsAsync<DistrictDto>().Result;
 
             ViewModel.SelectedDistrict = SelectedDistrict;
 
-            url = "cafedata/listcafesindistrict/" + id;
+            url = "cafedata/ListCafesForDistrict/" + id;
             response = client.GetAsync(url).Result;
             IEnumerable<CafeDto> RelatedCafes = response.Content.ReadAsAsync<IEnumerable<CafeDto>>().Result;
 
