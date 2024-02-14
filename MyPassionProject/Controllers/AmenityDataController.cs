@@ -50,7 +50,7 @@ namespace MyPassionProject.Controllers
         /// </returns>
         /// <param name="id">cafe Primary Key</param>
         /// <example>
-        /// GET: api/AmenityData/ListAmenitiesForCafe/1
+        /// GET: api/AmenityData/ListAmenitiesForCafe/5
         /// </example>
         [HttpGet]
         [ResponseType(typeof(AmenityDto))]
@@ -80,7 +80,7 @@ namespace MyPassionProject.Controllers
         /// </returns>
         /// <param name="id">cafe Primary Key</param>
         /// <example>
-        /// GET: api/AmenityData/ListAmenitiesNotInCafe/1
+        /// GET: api/AmenityData/ListAmenitiesNotInCafe/5
         /// </example>
         [HttpGet]
         [ResponseType(typeof(AmenityDto))]
