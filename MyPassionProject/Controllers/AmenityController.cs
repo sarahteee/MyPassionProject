@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using MyPassionProject.Models.ViewModels;
 using System.Web.Script.Serialization;
+using MyPassionProject.Models;
 
 namespace MyPassionProject.Controllers
 {
@@ -55,7 +56,7 @@ namespace MyPassionProject.Controllers
             //show all amenities available in single cafe
             url = "cafedata/listcafesforamenity/" + id;
             response = client.GetAsync(url).Result;
-            IEnumerable<CafeDto> RelevantCafes = response.Content.ReadAsAsync<IEnumerable<AnimalDto>>().Result;
+            IEnumerable<CafeDto> RelevantCafes = response.Content.ReadAsAsync<IEnumerable<CafeDto>>().Result;
 
             ViewModel.RelevantCafes = RelevantCafes;
 
@@ -116,7 +117,7 @@ namespace MyPassionProject.Controllers
         public ActionResult Update(int id, Amenity Amenity)
         {
             string url = "amenitydata/updateamenity/" + id;
-            string jsonpayload = jss.Serialize(Keeper);
+            string jsonpayload = jss.Serialize(Amenity);
             HttpContent content = new StringContent(jsonpayload);
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;

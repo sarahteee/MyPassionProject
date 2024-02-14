@@ -213,6 +213,10 @@
     <Compile Include="Migrations\202402060020465_cafe-amenities.designer.cs">
       <DependentUpon>202402060020465_cafe-amenities.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202402140013135_cafes1.cs" />
+    <Compile Include="Migrations\202402140013135_cafes1.designer.cs">
+      <DependentUpon>202402140013135_cafes1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Amenity.cs" />
@@ -363,6 +367,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202402060020465_cafe-amenities.resx">
       <DependentUpon>202402060020465_cafe-amenities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202402140013135_cafes1.resx">
+      <DependentUpon>202402140013135_cafes1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

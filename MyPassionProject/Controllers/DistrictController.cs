@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using MyPassionProject.Models.ViewModels;
 using System.Web.Script.Serialization;
+using MyPassionProject.Models;
 
 namespace MyPassionProject.Controllers
 {

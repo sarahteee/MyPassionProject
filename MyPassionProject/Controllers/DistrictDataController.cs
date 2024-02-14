@@ -40,7 +40,7 @@ namespace MyPassionProject.Controllers
         public IHttpActionResult FindDistrict(int id)
         {
             District District = db.Districts.Find(id);
-            DistrictDto DistrictDto = new DistrictDto();
+            DistrictDto DistrictDto = new DistrictDto()
             {
                 DistrictId = District.DistrictId,
                 DistrictName = District.DistrictName

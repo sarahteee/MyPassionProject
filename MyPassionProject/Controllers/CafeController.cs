@@ -136,7 +136,7 @@ namespace MyPassionProject.Controllers
         }
 
         // GET: Cafe/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id) { 
 
 
             UpdateCafe ViewModel = new UpdateCafe();
@@ -149,7 +149,7 @@ namespace MyPassionProject.Controllers
 
             //all districts to choose from when updating cafe
             //existing cafe info
-            url = "districtdata/listdistricts/"
+            url = "districtdata/listdistricts/";
             response = client.GetAsync(url).Result;
             IEnumerable<DistrictDto> DistrictOptions = response.Content.ReadAsAsync<IEnumerable<DistrictDto>>().Result;
 
