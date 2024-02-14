@@ -13,7 +13,7 @@ namespace MyPassionProject.Models.ViewModels
 
         public CafeDto selectedcafe { get; set; }
 
-        // all districts to choose from when updating this animal
+        // all districts to choose from when updating this cafe
 
         public IEnumerable<DistrictDto> DistrictOptions { get; set; }
     }

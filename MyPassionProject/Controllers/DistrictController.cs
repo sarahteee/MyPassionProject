@@ -25,7 +25,7 @@ namespace MyPassionProject.Controllers
         // GET: Cafes/List
         public ActionResult List()
         {
-            //objective: communicate with our Species data api to retrieve a list of Speciess
+            //objective: communicate with our district data api to retrieve a list of districts
             //curl https://localhost:44321/api/districtdata/listdistricts
 
             DetailsDistrict ViewModel = new DetailsDistrict();
@@ -42,7 +42,7 @@ namespace MyPassionProject.Controllers
         // GET: District/Details/5
         public ActionResult Details(int id)
         {
-            //objective: communicate with our Species data api to retrieve one Species
+            //objective: communicate with our district data api to retrieve one district
             //curl https://localhost:44321/api/districtdata/finddistricts/{id}
 
             DetailsDistrict ViewModel = new DetailsDistrict();

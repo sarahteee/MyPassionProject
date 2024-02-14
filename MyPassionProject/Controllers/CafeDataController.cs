@@ -17,7 +17,15 @@ namespace MyPassionProject.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/CafeData/ListCafes
+        /// <summary>
+        /// Returns all cafes in the system.
+        /// </summary>
+        /// <returns>
+        /// All cafes in the database, including their associated districts.
+        /// </returns>
+        /// <example>
+        /// GET: api/CafeData/ListCafes
+        /// </example>
         [HttpGet]
         [ResponseType(typeof(CafeDto))]
         public IHttpActionResult ListCafes()
@@ -43,6 +51,16 @@ namespace MyPassionProject.Controllers
             return Ok(CafeDtos);
         }
 
+        /// <summary>
+        /// Gathers information about all cafes related to a particular district ID
+        /// </summary>
+        /// <returns>
+        ///  All cafes in the database, including their associated district matched with a particular district ID
+        /// </returns>
+        /// <param name="id">District Id.</param>
+        /// <example>
+        /// GET: api/CafeData/ListCafesForDistrict/3
+        /// </example>
         [HttpGet]
         [ResponseType(typeof(CafeDto))]
         public IHttpActionResult ListCafesForDistrict(int id)
@@ -68,6 +86,16 @@ namespace MyPassionProject.Controllers
             return Ok(CafeDtos);
         }
 
+        /// <summary>
+        /// Gathers information about cafes related to a particular amenity
+        /// </summary>
+        /// <returns>
+        /// All cafes in the database, including their associated district that match to a particular amenity id
+        /// </returns>
+        /// <param name="id">District Id.</param>
+        /// <example>
+        /// GET: api/CafeData/ListCafesWithAmenity/1
+        /// </example>
         [HttpGet]
         [ResponseType(typeof(CafeDto))]
         public IHttpActionResult ListCafesWithAmenity(int id)
@@ -95,6 +123,19 @@ namespace MyPassionProject.Controllers
             return Ok(CafeDtos);
         }
 
+        /// <summary>
+        /// Associates a particular amenity with a particular cafe
+        /// </summary>
+        /// <param name="cafeid">The cafe ID primary key</param>
+        /// <param name="amenityid">The amenity ID primary key</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST api/CafeData/AssociateCafeWithAmenity/9/1
+        /// </example>
         [HttpPost]
         [Route("api/CafeData/AssociateCafeWithAmenity/{cafeid}/{amenityid}")]
         public IHttpActionResult AssociateCafeWithAmenity(int cafeid, int amenityid)
@@ -114,6 +155,19 @@ namespace MyPassionProject.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Removes an association between a particular amenity and a particular cafe
+        /// </summary>
+        /// <param name="cafeid">The cafe ID primary key</param>
+        /// <param name="amenityid">The amenity ID primary key</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST api/CafeData/UnAssociateCafeWithAmenity/9/1
+        /// </example>
         [HttpPost]
         [Route("api/CafeData/UnAssociateCafeWithAmenity/{cafeid}/{amenityid}")]
         public IHttpActionResult UnAssociateCafeWithAmenity(int cafeid, int amenityid)
@@ -133,8 +187,19 @@ namespace MyPassionProject.Controllers
             return Ok();
         }
 
-
-        // GET: api/CafeData/FindCafe/5
+        /// <summary>
+        /// Returns all cafes in the system.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: A cafe in the system matching up to the cafe ID primary key
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <param name="id">The primary key of the cafe</param>
+        /// <example>
+        /// GET: api/CafeData/FindCafe/5
+        /// </example>
         [ResponseType(typeof(CafeDto))]
         [HttpGet]
         public IHttpActionResult FindCafe(int id)
@@ -159,7 +224,22 @@ namespace MyPassionProject.Controllers
             return Ok(CafeDto);
         }
 
-        // POST: api/CafeData/UpdateCafe/5
+        /// <summary>
+        /// Updates a particular cafe in the system with POST Data input
+        /// </summary>
+        /// <param name="id">Represents the cafe ID primary key</param>
+        /// <param name="cafe">JSON FORM DATA of a cafe</param>
+        /// <returns>
+        /// HEADER: 204 (Success, No Content Response)
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// or
+        /// HEADER: 404 (Not Found)
+        /// </returns>
+        /// <example>
+        /// POST: api/CafeData/UpdateCafe/5
+        /// FORM DATA: cafe JSON Object
+        /// </example>
         [ResponseType(typeof(void))]
         [HttpPost]
         public IHttpActionResult UpdateCafe(int id, Cafe Cafe)
@@ -195,7 +275,20 @@ namespace MyPassionProject.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/CafeData/AddCafe
+        /// <summary>
+        /// Adds a cafe to the system
+        /// </summary>
+        /// <param name="cafe">JSON FORM DATA of a cafe</param>
+        /// <returns>
+        /// HEADER: 201 (Created)
+        /// CONTENT: Cafe ID, Cafe Data
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// </returns>
+        /// <example>
+        /// POST: api/CafeData/AddCafe
+        /// FORM DATA: Cafe JSON Object
+        /// </example>
         [ResponseType(typeof(Cafe))]
         [HttpPost]
         public IHttpActionResult AddCafe(Cafe Cafe)
@@ -211,7 +304,19 @@ namespace MyPassionProject.Controllers
             return CreatedAtRoute("DefaultApi", new { id = Cafe.CafeId }, Cafe);
         }
 
-        // POST: api/CafeData/DeleteCafe/5
+        /// <summary>
+        /// Deletes an cafe from the system by it's ID.
+        /// </summary>
+        /// <param name="id">The primary key of the cafe</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST: api/CafeData/DeleteCafe/5
+        /// FORM DATA: (empty)
+        /// </example>
         [ResponseType(typeof(Cafe))]
         [HttpPost]
         public IHttpActionResult DeleteCafe(int id)

@@ -17,7 +17,15 @@ namespace MyPassionProject.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/DistrictDatal/ListDistricts
+        /// <summary>
+        /// Returns all districts in the system.
+        /// </summary>
+        /// <returns>
+        /// All districts in the database, including their associated districts.
+        /// </returns>
+        /// <example>
+        /// GET: api/DistrictData/ListDistricts
+        /// </example>
         [HttpGet]
         [ResponseType(typeof(DistrictDto))]
         public IHttpActionResult ListDistricts()
@@ -34,7 +42,19 @@ namespace MyPassionProject.Controllers
             return Ok(DistrictDtos);
         }
 
-        // GET: api/DistrictData/FindDistrict/5
+        /// <summary>
+        /// Returns all districts in the system
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: A district in the system matching up to the district ID primary key
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <param name="id">The primary key of the district</param>
+        /// <example>
+        /// GET: api/DistrictData/FindDistrict/5
+        /// </example>
         [ResponseType(typeof(DistrictDto))]
         [HttpGet]
         public IHttpActionResult FindDistrict(int id)
@@ -53,7 +73,22 @@ namespace MyPassionProject.Controllers
             return Ok(DistrictDto);
         }
 
-        // PUT: api/DistrictData/UpdateDistrict/5
+        /// <summary>
+        /// Updates a particular district in the system with POST Data input
+        /// </summary>
+        /// <param name="id">Represents the district ID primary key</param>
+        /// <param name="District">JSON FORM DATA of a district</param>
+        /// <returns>
+        /// HEADER: 204 (Success, No Content Response)
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// or
+        /// HEADER: 404 (Not Found)
+        /// </returns>
+        /// <example>
+        /// POST: api/DistrictData/UpdateDistrict/5
+        /// FORM DATA: District JSON Object
+        /// </example>
         [ResponseType(typeof(void))]
         [HttpPost]
         public IHttpActionResult UpdateDistrict(int id, District District)
@@ -89,7 +124,20 @@ namespace MyPassionProject.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/DistrictData/Add
+        /// <summary>
+        /// Adds a district to the system
+        /// </summary>
+        /// <param name="District">JSON FORM DATA of an district</param>
+        /// <returns>
+        /// HEADER: 201 (Created)
+        /// CONTENT: District ID, District Data
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// </returns>
+        /// <example>
+        /// POST: api/DistrictData/AddDistrict
+        /// FORM DATA: District JSON Object
+        /// </example>
         [ResponseType(typeof(District))]
         [HttpPost]
         public IHttpActionResult AddDistrict(District District)
@@ -105,7 +153,19 @@ namespace MyPassionProject.Controllers
             return CreatedAtRoute("DefaultApi", new { id = District.DistrictId }, District);
         }
 
-        // DELETE: api/DistrictData/DeleteDistrict/5
+        /// <summary>
+        /// Deletes a district from the system by it's ID.
+        /// </summary>
+        /// <param name="id">The primary key of the district</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST: api/DistrctData/DeleteDistrict/5
+        /// FORM DATA: (empty)
+        /// </example>
         [ResponseType(typeof(District))]
         [HttpPost]
         public IHttpActionResult DeleteDistrict(int id)

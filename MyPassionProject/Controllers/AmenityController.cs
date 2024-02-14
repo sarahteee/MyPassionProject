@@ -70,7 +70,7 @@ namespace MyPassionProject.Controllers
             return View();
         }
 
-        // GET: Keeper/New
+        // GET: Amenity/New
         public ActionResult New()
         {
             return View();

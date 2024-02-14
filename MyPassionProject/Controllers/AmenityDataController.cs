@@ -16,7 +16,15 @@ namespace MyPassionProject.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/AmenityData/ListAmenities
+        /// <summary>
+        /// Returns all Amenities in the system.
+        /// </summary>
+        /// <returns>
+        /// All amenities in the database.
+        /// </returns>
+        /// <example>
+        /// GET: api/AmenityData/ListAmenities
+        /// </example>
         [HttpGet]
         [ResponseType(typeof(AmenityDto))]
         public IHttpActionResult ListAmenities()
@@ -33,7 +41,17 @@ namespace MyPassionProject.Controllers
             return Ok(AmenityDtos);
         }
 
-        // GET: api/AmenityData/ListAmenitiesForCafe/5
+        /// <summary>
+        /// Returns all amenities in the system associated with a particular cafe.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: all amenities in the database associated with a particular cafe
+        /// </returns>
+        /// <param name="id">cafe Primary Key</param>
+        /// <example>
+        /// GET: api/AmenityData/ListAmenitiesForCafe/1
+        /// </example>
         [HttpGet]
         [ResponseType(typeof(AmenityDto))]
         public IHttpActionResult ListAmenitiesForCafe(int id)
@@ -53,7 +71,17 @@ namespace MyPassionProject.Controllers
             return Ok(AmenityDtos);
         }
 
-        // GET: api/AmenityData/ListAmenitiesNotInCafe/5
+        /// <summary>
+        /// Returns amenities in the system not available at a cafe.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: all amenities in the database available at a cafe
+        /// </returns>
+        /// <param name="id">cafe Primary Key</param>
+        /// <example>
+        /// GET: api/AmenityData/ListAmenitiesNotInCafe/1
+        /// </example>
         [HttpGet]
         [ResponseType(typeof(AmenityDto))]
         public IHttpActionResult ListAmenitiesNotInCafe(int id)
@@ -73,7 +101,19 @@ namespace MyPassionProject.Controllers
             return Ok(AmenityDtos);
         }
 
-        // GET: api/AmenityData/FindAmenity/5
+        /// <summary>
+        /// Returns all amenities in the system.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: An amenity in the system matching up to the amenity ID primary key
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <param name="id">The primary key of the amenity</param>
+        /// <example>
+        /// GET: api/AmenityData/FindAmenity/5
+        /// </example>
         [HttpGet]
         [ResponseType(typeof(AmenityDto))]
         public IHttpActionResult FindAmenity(int id)
@@ -93,7 +133,22 @@ namespace MyPassionProject.Controllers
             return Ok(AmenityDto);
         }
 
-        // PUT: api/AmenityData/UpdateAmenity/5
+        /// <summary>
+        /// Updates a particular amenity in the system with POST Data input
+        /// </summary>
+        /// <param name="id">Represents the amenity ID primary key</param>
+        /// <param name="Amenity">JSON FORM DATA of an Amenity</param>
+        /// <returns>
+        /// HEADER: 204 (Success, No Content Response)
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// or
+        /// HEADER: 404 (Not Found)
+        /// </returns>
+        /// <example>
+        /// POST: api/AmenityData/UpdateAmenity/5
+        /// FORM DATA: Amenity JSON Object
+        /// </example>
         [ResponseType(typeof(void))]
         public IHttpActionResult UpdateAmenity(int id, Amenity Amenity)
         {
@@ -128,7 +183,20 @@ namespace MyPassionProject.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/AmenityData/AddAmenity
+        /// <summary>
+        /// Adds an amenity to the system
+        /// </summary>
+        /// <param name="Amenity">JSON FORM DATA of an Amenity</param>
+        /// <returns>
+        /// HEADER: 201 (Created)
+        /// CONTENT: Amenity ID, Amenity Data
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// </returns>
+        /// <example>
+        /// POST: api/AmenityData/AddAmenity
+        /// FORM DATA: Amenity JSON Object
+        /// </example>
         [ResponseType(typeof(Amenity))]
         [HttpPost]
         public IHttpActionResult AddAmenity(Amenity Amenity)
@@ -144,7 +212,19 @@ namespace MyPassionProject.Controllers
             return CreatedAtRoute("DefaultApi", new { id = Amenity.AmenityId }, Amenity);
         }
 
-        // DELETE: api/AmenityData/DeleteAmenity/5
+        /// <summary>
+        /// Deletes an amenity from the system by it's ID.
+        /// </summary>
+        /// <param name="id">The primary key of the amenity</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST: api/AmenityData/DeleteAmenity/5
+        /// FORM DATA: (empty)
+        /// </example>
         [ResponseType(typeof(Amenity))]
         [HttpPost]
         public IHttpActionResult DeleteAmenity(int id)
