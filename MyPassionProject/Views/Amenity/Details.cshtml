@@ -2,21 +2,19 @@
 @{
     ViewBag.Title = "Details";
 }
+<link href="~/Content/amenity-details.css" rel="stylesheet" type="text/css" />
 
-<a href="/Amenity/List">Go back to list</a>
-<br />
-<a href="/Amenity/Edit/@Model.SelectedAmenity.AmenityId">Update</a>
-<br />
-<a style="color:#ab2020;" href="/Amenity/DeleteConfirm/@Model.SelectedAmenity.AmenityId">Delete</a>
-<h2>@Model.SelectedAmenity.AmenityName</h2>
+<a class="option-back" href="/Amenity/List">Go back to list</a>
+<a class="option-update" href="/Amenity/Edit/@Model.SelectedAmenity.AmenityId">Update</a>
+<a class="option-delete" href="/Amenity/DeleteConfirm/@Model.SelectedAmenity.AmenityId">Delete</a>
+<h2 class="district-name">@Model.SelectedAmenity.AmenityName</h2>
 
-
-
-<div>
+<div class="related-cafes">
     <h3>Available In:</h3>
-    @foreach (var cafe in Model.RelevantCafes)
-    {
-        <a href="/Cafe/Details/@cafe.CafeId">@cafe.CafeName</a><br />
-
-    }
+    <div class="cafe-list">
+        @foreach (var cafe in Model.RelevantCafes)
+        {
+            <a href="/Cafe/Details/@cafe.CafeId">@cafe.CafeName</a><br />
+        }
+    </div>
 </div>

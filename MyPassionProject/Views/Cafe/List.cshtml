@@ -3,16 +3,30 @@
 @{
     ViewBag.Title = "List";
 }
+<link href="~/Content/cafe-list.css" rel="stylesheet" type="text/css" />
 
-<h2>List</h2>
-<a href="/Cafe/New">New Cafe</a>
-@foreach (var cafe in Model)
-{
+<h2>Browse Cafes</h2>
+<a href="/Cafe/New" id="newCafe">New Cafe</a>
+
+<form action="/Cafe/List" method="GET">
     <div>
-        <h2><a href="/Cafe/Details/@cafe.CafeId">@cafe.CafeName</a></h2>
-        <div>District: @cafe.DistrictName</div>
-        <div>Address: @cafe.CafeAddress</div>
+        <input type="text" name="SearchKey" />
+        <input type="submit" value="Search" />
+    </div>
+</form>
 
+@foreach (var Cafe in Model)
+{
+    <div class="cafe-block">
+        <div class="cafe-image">
+            <!--image -->
+        </div>
+        <div class="cafe-details">
+            <div class="cafe-name"><a href="/Cafe/Details/@Cafe.CafeId">@Cafe.CafeName</a></div>
+            <div class="cafe-district">District: @Cafe.DistrictName</div>
+            <div class="cafe-address">Address: @Cafe.CafeAddress</div>
+        </div>
     </div>
 }
+
 

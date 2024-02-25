@@ -5,38 +5,50 @@
     ViewBag.Title = "View";
 }
 
-<a href="/Cafe/List">Back to List</a>
-<br />
-<a href="/Cafe/Edit/@Model.selectedcafe.CafeId">Update</a>
-<br />
-<a style="color:darkred;" href="/Cafe/DeleteConfirm/@Model.selectedcafe.CafeId">Delete</a>
-<h2>@Model.selectedcafe.CafeName</h2>
-<div>@Model.selectedcafe.DistrictName</div>
-<div>@Model.selectedcafe.CafeAddress</div>
-<div>@Model.selectedcafe.CafePhone</div>
-<div>@Model.selectedcafe.CafeDescription</div>
-<div>@Model.selectedcafe.CafeWebsite</div>
-<div>@Model.selectedcafe.CafeImage</div>
+<link href="~/Content/cafe-details.css" rel="stylesheet" type="text/css" />
+
+<a href="/Cafe/List" class="back-link">Back to List</a>
+
+<div class="cafe-container">
+    <div class="cafe-image">
+        <img src="@Model.SelectedCafe.CafeImage" alt="@Model.SelectedCafe.CafeName" />
+    </div>
+
+    <div class="cafe-info">
+        <h1 class="cafe-name">@Model.SelectedCafe.CafeName</h1>
+        <div class="cafe-district">@Model.SelectedCafe.DistrictName</div>
+        <div class="cafe-address">@Model.SelectedCafe.CafeAddress</div>
+        <div class="cafe-phone">@Model.SelectedCafe.CafePhone</div>
+        <div class="cafe-description">@Model.SelectedCafe.CafeDescription</div>
+        <div class="cafe-website">@Model.SelectedCafe.CafeWebsite</div>
+        <div>
+            <a href="/Cafe/Edit/@Model.SelectedCafe.CafeId" class="action-link update-link">Update</a>
+            <a href="/Cafe/DeleteConfirm/@Model.SelectedCafe.CafeId" class="action-link delete-link">Delete</a>
+        </div>
+    </div>
+</div>
 
 <div>
-    <h2>Ameities in @Model.selectedcafe.CafeName:</h2>
-    @foreach (var amenity in Model.CurrentAmenities)
-    {
-
-        <a href="/Amenity/Details/@amenity.AmenityId">@amenity.AmenityName</a> <a style="color:#ab2020;" href="/Cafe/Unassociate/@Model.selectedcafe.CafeId?AmenityId=@amenity.AmenityId">[x]</a><br />
-    }
-
-    <div>
-        <h4>Add new Amenity to @Model.selectedcafe.CafeName</h4>
-        <form method="POST" action="/Cafe/Associate/@Model.selectedcafe.CafeId">
-            <select name="CafeId">
-                @foreach (var amenity in Model.AvailableAmenities)
+    <h2>Amenities in @Model.SelectedCafe.CafeName:</h2>
+    <ul class="amenity-list">
+        @foreach (var amenity in Model.AvailableAmenities)
+        {
+            <li>
+                <a href="/Amenity/Details/@amenity.AmenityId">@amenity.AmenityName</a>
+                <a href="/Cafe/Unassociate/@Model.SelectedCafe.CafeId?AmenityId=@amenity.AmenityId" class="action-link delete-link">[x]</a>
+            </li>
+        }
+    </ul>
+    <div class="add-amenity-form">
+        <h4>Add new Amenity to @Model.SelectedCafe.CafeName</h4>
+        <form method="POST" action="/Cafe/Associate/@Model.SelectedCafe.CafeId">
+            <select name="AmenityId">
+                @foreach (var amenity in Model.CurrentAmenities)
                 {
-                    <option value="@amenity.AmenityId">@amenity.AmenityName </option>
+                    <option value="@amenity.AmenityId">@amenity.AmenityName</option>
                 }
-
             </select>
-            <input type="submit" value="Associate Amenity" />
+            <input type="submit" value="Add Amenity" />
         </form>
     </div>
 </div>

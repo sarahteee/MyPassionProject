@@ -22,17 +22,16 @@ namespace MyPassionProject.Controllers
             client.BaseAddress = new Uri("https://localhost:44321/api/");
         }
 
-        // GET: Cafes/List
-        public ActionResult List()
+        // GET: District/List
+        public ActionResult List(string SearchKey = null)
         {
             //objective: communicate with our district data api to retrieve a list of districts
             //curl https://localhost:44321/api/districtdata/listdistricts
 
-            DetailsDistrict ViewModel = new DetailsDistrict();
+            //DetailsDistrict ViewModel = new DetailsDistrict();
 
-            string url = "districtdata/listdistricts";
+            string url = "districtdata/listdistricts/" + SearchKey;
             HttpResponseMessage response = client.GetAsync(url).Result;
-
             IEnumerable<DistrictDto> Districts = response.Content.ReadAsAsync<IEnumerable<DistrictDto>>().Result;
                         
 
@@ -47,7 +46,7 @@ namespace MyPassionProject.Controllers
 
             DetailsDistrict ViewModel = new DetailsDistrict();
 
-            string url = "districtdata/finddistricts/" + id;
+            string url = "districtdata/finddistrict/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             DistrictDto SelectedDistrict = response.Content.ReadAsAsync<DistrictDto>().Result;

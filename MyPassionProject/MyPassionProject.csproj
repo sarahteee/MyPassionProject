@@ -232,6 +232,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\amenity-details.css" />
+    <Content Include="Content\amenity-list.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -248,6 +250,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\cafe-details.css" />
+    <Content Include="Content\cafe-list.css" />
+    <Content Include="Content\district-details.css" />
+    <Content Include="Content\district-list.css" />
+    <Content Include="Content\Images\indexpic.png" />
+    <Content Include="Content\index.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

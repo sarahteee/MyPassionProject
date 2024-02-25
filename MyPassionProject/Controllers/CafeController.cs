@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MyPassionProject.Models.ViewModels;
 using System.Web.Script.Serialization;
+using MyPassionProject.Migrations;
 
 namespace MyPassionProject.Controllers
 {
@@ -24,18 +25,18 @@ namespace MyPassionProject.Controllers
         }
 
         // GET: Cafe/List
-        public ActionResult List()
+        public ActionResult List(string SearchKey = null)
         {
             //objective: with our cafe data api to retrieve a list of cafes
             //curl https://localhost:44321/api/cafedata/listcafes
 
-            string url = "cafedata/listcafes";
+            string url = "cafedata/listcafes/" + SearchKey;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            IEnumerable<CafeDto> cafes = response.Content.ReadAsAsync<IEnumerable<CafeDto>>().Result;
+            IEnumerable<CafeDto> Cafes = response.Content.ReadAsAsync<IEnumerable<CafeDto>>().Result;
 
             //returns Views/Cafe/List.cshtml
-            return View(cafes);
+            return View(Cafes);
 
         }
 
@@ -49,14 +50,22 @@ namespace MyPassionProject.Controllers
 
             string url = "cafedata/findcafe/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            CafeDto selectedcafe = response.Content.ReadAsAsync<CafeDto>().Result;
-            ViewModel.selectedcafe = selectedcafe;
+
+            Debug.WriteLine("The response code is ");
+            Debug.WriteLine(response.StatusCode);
+
+            CafeDto SelectedCafe = response.Content.ReadAsAsync<CafeDto>().Result;
+            ViewModel.SelectedCafe = SelectedCafe;
+
+            Debug.WriteLine("The cafe recieved is: " + SelectedCafe.CafeId);
+            Debug.WriteLine(SelectedCafe.CafeName);
 
             //show associated amenities with this cafe
             url = "amenitydata/listamenitiesforcafe/" + id;
             response = client.GetAsync(url).Result;
             IEnumerable<AmenityDto> AvailableAmenities = response.Content.ReadAsAsync<IEnumerable<AmenityDto>>().Result;
             ViewModel.AvailableAmenities = AvailableAmenities;
+            
 
             url = "amenitydata/listamenitiesnotincafe/" + id;
             response= client.GetAsync(url).Result;
@@ -70,6 +79,8 @@ namespace MyPassionProject.Controllers
         [HttpPost]
         public ActionResult Associate (int id, int AmenityId)
         {
+            Debug.WriteLine("Attempting to associate cafe :" + id + "with amenity" + AmenityId);
+            
             //call api to associate cafe with amenity
             string url = "cafedata/associatecafewithamenity/" + id + "/" + AmenityId;
             HttpContent content = new StringContent("");
@@ -83,8 +94,10 @@ namespace MyPassionProject.Controllers
         [HttpGet]
         public ActionResult UnAssociate(int id, int AmenityId)
         {
+            Debug.WriteLine("Attempting to unassociate cafe :" + id + "with amenity" + AmenityId);
+
             //call api to unassociate cafe with amenity
-            string url = "cafedata/unassociatecafewithamenity/" + id+"/"+AmenityId;
+            string url = "cafedata/unassociatecafewithamenity/" + id+ "/" +AmenityId;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync (url, content).Result;
@@ -102,7 +115,7 @@ namespace MyPassionProject.Controllers
             //information about all districts in the system
             //GET api/districtdata/listdistricts
 
-            string url = "districtdata/listdistricts";
+            string url = "districtdata/listdistricts/";
             HttpResponseMessage response = client.GetAsync(url).Result;
             IEnumerable<DistrictDto> DistrictOptions = response.Content.ReadAsAsync<IEnumerable<DistrictDto>>().Result;
 
@@ -112,14 +125,14 @@ namespace MyPassionProject.Controllers
 
         // POST: Cafe/Create
         [HttpPost]
-        public ActionResult Create(Cafe cafe)
+        public ActionResult Create(Cafe Cafe)
         {
             //objective: add a new cafe into the system using the API
             //curl -H "Content-Type:application/json" -d @cafe.json https://localhost:44321/api/cafedata/addcafe
             string url = "cafedata/addcafe";
 
-            string jsonpayload = jss.Serialize(cafe);
-
+            string jsonpayload = jss.Serialize(Cafe);
+            //Debug.WriteLine(jsonpayload);
 
             HttpContent content = new StringContent(jsonpayload);
             content.Headers.ContentType.MediaType = "application/json";

@@ -1,10 +1,10 @@
 ﻿{
-  "CafeId":  9,
-  "Name": "Creeds Coffee Bar",
-  "Address": "450 Dupont St, Toronto, ON M5R 3P3",
-  "Phone": "416-923-2500",
-  "Description": "Family-owned and operated, this multifaceted shop provides superior experiences.Enjoy the carefully curated space!",
-  "Website": "www.creeds.com",
-  "Image": null,
-  "DistrictId": 3
-}
+    "CafeId": 9,
+    "Name": "Creeds Coffee Bar",
+    "Address": "450 Dupont St, Toronto, ON M5R 3P3",
+    "Phone": "416-923-2500",
+    "Description": "Family-owned and operated, this multifaceted shop provides superior experiences.Enjoy the carefully curated space!",
+    "Website": "www.creeds.com",
+    "Image": null,
+    "DistrictId": 3
+  }

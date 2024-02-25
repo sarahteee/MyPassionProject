@@ -1,0 +1,83 @@
+﻿body {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+    color: black;
+}
+
+.back-link {
+    display: inline-block;
+    background-color: lightgray;
+    color: black;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.cafe-container {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.cafe-image {
+    margin-bottom: 10px;
+    width: 500px;
+    height: 500px;
+    background-color: #ddd;
+}
+
+.cafe-info {
+    flex-grow: 1; 
+    padding-left: 20px; 
+}
+
+.cafe-name,
+.cafe-district {
+    margin: 0; 
+}
+
+.cafe-address,
+.cafe-phone,
+.cafe-description,
+.cafe-website {
+    margin-bottom: 10px;
+}
+
+    .cafe-website a {
+        color: #0066cc;
+        text-decoration: none;
+    }
+
+        .cafe-website a:hover {
+            text-decoration: underline;
+        }
+
+.amenity-list {
+    list-style: none; 
+    padding: 0;
+    margin: 20px 0;
+}
+
+.add-amenity-form {
+    margin-top: 20px;
+}
+
+.action-link {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.update-link {
+    background-color: #8bb082;
+    color: black;
+}
+
+.delete-link {
+    background-color: #bd6464;
+    color: black;
+}

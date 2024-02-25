@@ -1,0 +1,36 @@
+﻿
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.hero-section {
+    display: flex; 
+    flex-wrap: wrap; 
+    align-items: center; 
+    justify-content: center; 
+    margin-bottom: 20px; 
+}
+
+.hero-image {
+    flex: 1; 
+    display: flex;
+    justify-content: center; 
+    margin-bottom: 20px; 
+}
+
+    .hero-image img {
+        max-width: 100%; 
+        height: auto; 
+    }
+
+.welcome-message {
+    flex: 1; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    text-align: center; 
+}
+

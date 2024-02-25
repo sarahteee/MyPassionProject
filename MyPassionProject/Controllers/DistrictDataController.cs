@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MyPassionProject.Migrations;
@@ -27,19 +28,28 @@ namespace MyPassionProject.Controllers
         /// GET: api/DistrictData/ListDistricts
         /// </example>
         [HttpGet]
-        [ResponseType(typeof(DistrictDto))]
-        public IHttpActionResult ListDistricts()
+        [Route("api/DistrictData/ListDistricts/{SearchKey?}")]
+        public IEnumerable<DistrictDto> ListDistricts(string SearchKey = null)
         {
-            List<District> Districts = db.Districts.ToList();
-            List<DistrictDto> DistrictDtos = new List<DistrictDto>();
+            //List<District> Districts = db.Districts.ToList();
+            List<District> Districts = new List<District>();
 
+            if (SearchKey == null)
+            {
+                Districts = db.Districts.ToList();
+            }
+            else
+            {
+                Districts = db.Districts.Where(d => d.DistrictName.Contains(SearchKey)).ToList();
+            }
+            List<DistrictDto> DistrictDtos = new List<DistrictDto>();
             Districts.ForEach(d => DistrictDtos.Add(new DistrictDto()
             {
                 DistrictId = d.DistrictId,
                 DistrictName = d.DistrictName
             }));
 
-            return Ok(DistrictDtos);
+            return DistrictDtos;
         }
 
         /// <summary>

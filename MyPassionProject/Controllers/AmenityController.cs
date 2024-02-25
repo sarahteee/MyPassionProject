@@ -49,12 +49,20 @@ namespace MyPassionProject.Controllers
             string url = "amenitydata/findamenity/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
+            Debug.WriteLine("The response code is: ");
+            Debug.WriteLine(response.StatusCode);
+
+
             AmenityDto SelectedAmenity = response.Content.ReadAsAsync<AmenityDto>().Result;
+            Debug.WriteLine("The amenity recived is: ");
+            Debug.WriteLine(SelectedAmenity.AmenityId);
+
+
 
             ViewModel.SelectedAmenity = SelectedAmenity;
 
-            //show all amenities available in single cafe
-            url = "cafedata/listcafesforamenity/" + id;
+            //show all cafes with an amenity
+            url = "cafedata/ListCafesWithAmenity/" + id;
             response = client.GetAsync(url).Result;
             IEnumerable<CafeDto> RelevantCafes = response.Content.ReadAsAsync<IEnumerable<CafeDto>>().Result;
 

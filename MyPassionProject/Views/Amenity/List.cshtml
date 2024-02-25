@@ -2,10 +2,15 @@
 @{
     ViewBag.Title = "List";
 }
+<link href="~/Content/amenity-list.css" rel="stylesheet" type="text/css" />
 
-<h2>List</h2>
-<a href="/Amenity/New">New Amenity</a>
-@foreach (var Amenity in Model)
+<h2 class="main-heading">Browse Amenities</h2>
+<a href="/Amenity/New" class="new-amenity-link">New Amenity</a>
+
+@foreach (var amenity in Model)
 {
-    <h2><a href="/Amenity/Details/@Amenity.AmenityId">@Amenity.AmenityName</a></h2>
+    <div class="amenity-item">
+        <h2 class="amenity-name"><a href="/Amenity/Details/@amenity.AmenityId">@amenity.AmenityName</a></h2>
+    </div>
 }
+

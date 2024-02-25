@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Microsoft.Ajax.Utilities;
 using MyPassionProject.Models;
 
 namespace MyPassionProject.Controllers
@@ -21,19 +22,26 @@ namespace MyPassionProject.Controllers
         /// Returns all cafes in the system.
         /// </summary>
         /// <returns>
-        /// All cafes in the database, including their associated districts.
+        /// All cafes in the database with names containing the seach key, including their associated districts and addresses.
         /// </returns>
         /// <example>
-        /// GET: api/CafeData/ListCafes
+        /// GET: api/CafeData/ListCafes/creeds
         /// </example>
         [HttpGet]
-        [ResponseType(typeof(CafeDto))]
-        public IHttpActionResult ListCafes()
+        [Route("api/CafeData/ListCafes/{SearchKey?}")]
+        public IEnumerable<CafeDto> ListCafes(string SearchKey = null)
         {
-            //sending query to database select * from cafes
-            List<Cafe> Cafes = db.Cafes.ToList();
-            List<CafeDto> CafeDtos = new List<CafeDto>();
+            List<Cafe> Cafes = new List<Cafe>();
 
+            if(SearchKey == null)
+            {
+                Cafes = db.Cafes.ToList();
+            } else
+            {
+                Cafes = db.Cafes.Where(c => c.Name.Contains(SearchKey)).ToList();
+            }
+
+            List<CafeDto> CafeDtos = new List<CafeDto>();
             Cafes.ForEach(c => CafeDtos.Add(new CafeDto()
             {
                 CafeId = c.CafeId,
@@ -45,10 +53,9 @@ namespace MyPassionProject.Controllers
                 CafeImage = c.Image,
                 DistrictId = c.DistrictId,
                 DistrictName = c.District.DistrictName
-            }
-            ));
+            }));
 
-            return Ok(CafeDtos);
+            return CafeDtos;
         }
 
         /// <summary>
@@ -92,7 +99,7 @@ namespace MyPassionProject.Controllers
         /// <returns>
         /// All cafes in the database, including their associated district that match to a particular amenity id
         /// </returns>
-        /// <param name="id">District Id.</param>
+        /// <param name="id">Amenity Id.</param>
         /// <example>
         /// GET: api/CafeData/ListCafesWithAmenity/1
         /// </example>
@@ -149,6 +156,10 @@ namespace MyPassionProject.Controllers
                 return NotFound();
             }
 
+            Debug.WriteLine("input cafe id is:" + cafeid);
+            Debug.WriteLine("selected cafe name is:" + SelectedCafe.Name);
+
+
             SelectedCafe.Amenities.Add(SelectedAmenity);
             db.SaveChanges();
 
@@ -180,6 +191,8 @@ namespace MyPassionProject.Controllers
             {
                 return NotFound();
             }
+
+            Debug.WriteLine("input cafe id is: " + cafeid);
 
             SelectedCafe.Amenities.Remove(SelectedAmenity);
             db.SaveChanges();

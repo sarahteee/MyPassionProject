@@ -2,10 +2,23 @@
 @{
     ViewBag.Title = "List";
 }
+<link href="~/Content/district-list.css" rel="stylesheet" type="text/css" />
+<h2>Browse Districts</h2>
+<a href="/District/New" class="new-district-link">New District</a>
 
-<h2>List</h2>
-<a href="/District/New">New District</a>
-@foreach (var Disrtrict in Model)
+<form action="/District/List" method="GET">
+    <div>
+        <input type="text" name="SearchKey" />
+        <input type="submit" value="Search" />
+    </div>
+</form>
+
+@foreach (var District in Model)
 {
-    <h2><a href="/District/Details/@District.DIstrictId">@District.DistrictName</a></h2>
+    <div class="district-item">
+        <h2 class="district-name">
+            <a href="/District/Details/@District.DistrictId">@District.DistrictName</a>
+        </h2>
+    </div>
 }
+
