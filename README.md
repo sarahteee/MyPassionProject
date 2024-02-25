@@ -18,7 +18,7 @@ Toronto Cafe Directory is a platform designed to help café enthusiasts explore,
 
 ## Installation
 
-To run Café Connect locally on your machine, follow these steps:
+To run locally on your machine, follow these steps:
 
 1. Clone the repository:
    
